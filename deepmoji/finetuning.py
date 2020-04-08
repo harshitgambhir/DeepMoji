@@ -18,13 +18,13 @@ from keras.optimizers import Adam
 from keras.utils.np_utils import to_categorical
 from keras.models import model_from_json
 
-from global_variables import (
+from .global_variables import (
     FINETUNING_METHODS,
     FINETUNING_METRICS,
     WEIGHTS_DIR)
-from tokenizer import tokenize
-from sentence_tokenizer import SentenceTokenizer
-from attlayer import AttentionWeightedAverage
+from .tokenizer import tokenize
+from .sentence_tokenizer import SentenceTokenizer
+from .attlayer import AttentionWeightedAverage
 
 
 def load_benchmark(path, vocab, extend_with=0):

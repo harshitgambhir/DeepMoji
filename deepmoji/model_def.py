@@ -3,10 +3,9 @@
 
 from __future__ import print_function, division
 
-from keras.models import Model, Sequential
-from keras.layers.merge import concatenate
-from keras.layers import Input, Bidirectional, Embedding, Dense, Dropout, SpatialDropout1D, LSTM, Activation
-from keras.regularizers import L1L2
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Input, Bidirectional, Embedding, Dense, Dropout, SpatialDropout1D, LSTM, Activation, Concatenate
+from tensorflow.keras.regularizers import L1L2
 from .attlayer import AttentionWeightedAverage
 from .global_variables import NB_TOKENS, NB_EMOJI_CLASSES
 import numpy as np
@@ -143,7 +142,7 @@ def deepmoji_architecture(nb_classes, nb_tokens, maxlen, feature_output=False, e
     # ordering of the way the merge is done is important for consistency with the pretrained model
     lstm_0_output = Bidirectional(LSTM(512, return_sequences=True), name="bi_lstm_0")(x)
     lstm_1_output = Bidirectional(LSTM(512, return_sequences=True), name="bi_lstm_1")(lstm_0_output)
-    x = concatenate([lstm_1_output, lstm_0_output, x])
+    x = Concatenate([lstm_1_output, lstm_0_output, x])
 
     # if return_attention is True in AttentionWeightedAverage, an additional tensor
     # representing the weight at each timestep is returned
@@ -255,11 +254,11 @@ def get_weights_from_hdf5(filepath):
     """
 
     with h5py.File(filepath, mode='r') as f:
-        layer_names = [n.decode('utf8') for n in f.attrs['layer_names']]
+        layer_names = [n.encode().decode('utf8') for n in f.attrs['layer_names']]
         layer_weights = []
         for k, l_name in enumerate(layer_names):
             g = f[l_name]
-            weight_names = [n.decode('utf8') for n in g.attrs['weight_names']]
+            weight_names = [n.encode().decode('utf8') for n in g.attrs['weight_names']]
             weight_values = [g[weight_name][:] for weight_name in weight_names]
             if len(weight_values):
                 layer_weights.append([l_name, weight_names, weight_values])

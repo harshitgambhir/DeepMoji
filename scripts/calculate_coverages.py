@@ -36,7 +36,7 @@ for p in DATASET_PATHS:
     try:
         s['texts'] = [unicode(x) for x in s['texts']]
     except UnicodeDecodeError:
-        s['texts'] = [x.decode('utf-8') for x in s['texts']]
+        s['texts'] = [x.encode().decode('utf-8') for x in s['texts']]
 
     # Own
     st = SentenceTokenizer({}, 30)

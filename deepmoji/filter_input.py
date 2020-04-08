@@ -25,7 +25,7 @@ def read_wanted_emojis(path="wanted_emojis.csv"):
         reader = csv.reader(f)
         for line in reader:
             line = line[0].strip().replace('\n', '')
-            line = line.decode('unicode-escape')
+            line = line.encode().decode('unicode-escape')
             emojis.append(line)
     return emojis
 

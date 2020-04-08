@@ -82,7 +82,7 @@ for dset in DATASETS:
     try:
         texts = [unicode(x) for x in data['texts']]
     except UnicodeDecodeError:
-        texts = [x.decode('utf-8') for x in data['texts']]
+        texts = [x.encode().decode('utf-8') for x in data['texts']]
 
     wg = WordGenerator(texts)
     vb = VocabBuilder(wg)

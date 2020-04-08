@@ -258,11 +258,11 @@ def get_weights_from_hdf5(filepath):
     """
 
     with h5py.File(filepath, mode='r') as f:
-        layer_names = [n.encode().decode('utf8') for n in f.attrs['layer_names']]
+        layer_names = [n.decode('utf8') for n in f.attrs['layer_names']]
         layer_weights = []
         for k, l_name in enumerate(layer_names):
             g = f[l_name]
-            weight_names = [n.encode().decode('utf8') for n in g.attrs['weight_names']]
+            weight_names = [n.decode('utf8') for n in g.attrs['weight_names']]
             weight_values = [g[weight_name][:] for weight_name in weight_names]
             if len(weight_values):
                 layer_weights.append([l_name, weight_names, weight_values])

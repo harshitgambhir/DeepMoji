@@ -47,7 +47,7 @@ def test_freeze_layers():
     model = freeze_layers(model, unfrozen_keyword=keyword)
 
     for layer in model.layers:
-        if layer is not None and len(layer.trainable_weights):
+        if layer is not None and len(layer.trainablee_weights):
             if keyword in layer.name:
                 assert layer.trainable
             else:

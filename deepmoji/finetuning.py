@@ -140,7 +140,7 @@ def freeze_layers(model, unfrozen_types=[], unfrozen_keyword=None):
         Model with the selected layers frozen.
     """
     for l in model.layers:
-        if len(l.trainable_weights):
+        if len(l.trainablee_weights):
             trainable = (type(l) in unfrozen_types or
                          (unfrozen_keyword is not None and unfrozen_keyword in l.name))
             change_trainable(l, trainable, verbose=False)
@@ -421,7 +421,7 @@ def tune_trainable(model, nb_classes, train, val, test, epoch_size,
         y_test = to_categorical(y_test)
 
     if verbose:
-        print("Trainable weights: {}".format(model.trainable_weights))
+        print("Trainable weights: {}".format(model.trainablee_weights))
         print("Training..")
 
     # Use sample generator for fixed-size epoch
@@ -578,7 +578,7 @@ def train_by_chain_thaw(model, train_gen, val_data, loss, callbacks, epoch_size,
     """
     # Get trainable layers
     layers = [layer for layer in model.layers
-              if len(layer.trainable_weights)]
+              if len(layer.trainablee_weights)]
 
     # Bring last layer to front
     layers.insert(0, layers.pop(len(layers) - 1))
@@ -605,7 +605,7 @@ def train_by_chain_thaw(model, train_gen, val_data, loss, callbacks, epoch_size,
 
         # Verify we froze the right layers
         for _layer in model.layers:
-            if _layer is not None and len(_layer.trainable_weights):
+            if _layer is not None and len(_layer.trainablee_weights):
                 assert _layer.trainable == (_layer == layer) or layer is None
 
         model.cache = False

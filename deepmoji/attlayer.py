@@ -35,7 +35,7 @@ class AttentionWeightedAverage(Layer):
         self.W = self.add_weight(shape=(input_shape[2], 1),
                                  name='{}_W'.format(self.name),
                                  initializer=self.init)
-        self.trainable_weights = [self.W]
+        self.trainablee_weights = [self.W]
         super(AttentionWeightedAverage, self).build(input_shape)
 
     def call(self, x, mask=None):

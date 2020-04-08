@@ -31,7 +31,7 @@ VARIATION_SELECTORS = [u'\ufe00',
                        u'\ufe0f']
 
 # from https://stackoverflow.com/questions/92438/stripping-non-printable-characters-from-a-string-in-python
-ALL_CHARS = (unichr(i) for i in xrange(sys.maxunicode))
+ALL_CHARS = (unichr(i) for i in range(sys.maxunicode))
 CONTROL_CHARS = ''.join(map(unichr, range(0, 32) + range(127, 160)))
 CONTROL_CHAR_REGEX = re.compile('[%s]' % re.escape(CONTROL_CHARS))
 

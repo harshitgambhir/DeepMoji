@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='deepmoji',
     version='1.0',
-    packages=['deepmoji'],
+    packages=['deepmoji', 'deepmoji/examples'],
     description='DeepMoji library',
     include_package_data=True,
     install_requires=[

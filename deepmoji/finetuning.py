@@ -6,7 +6,6 @@ import sys
 import uuid
 from time import sleep
 
-import h5py
 import math
 import pickle
 import numpy as np
